@@ -19,7 +19,7 @@ public class ItemUtils
 
     public static void deleteItem(string name)
     {
-        if (getSlotByID(name).itemInSlot.isEmpty())
+        if (getSlotByID(name).itemInSlot == null || getSlotByID(name).itemInSlot.isEmpty())
         {
             Debug.Log("No item in slot, nothing to delete!");
 
@@ -28,7 +28,10 @@ public class ItemUtils
 
         Debug.Log("Deleted item: " + getSlotByID(name).itemInSlot.name);
 
+
         getSlotByID(name).itemInSlot = null;
+
+
     }
 
     public static Slot getSlotByID(string ID)
@@ -37,6 +40,11 @@ public class ItemUtils
         int slotNumber = getNumberOfItemSlot(ID);
 
         return Save.file.player.inventory.getBag(bagName).Slots[slotNumber];
+    }
+
+    public static Item getItemByID(string ID)
+    {
+        return getSlotByID(ID).itemInSlot;
     }
 
     public static void sellItem(string ID)
@@ -48,7 +56,7 @@ public class ItemUtils
 
     private static int getValue(Item item)
     {
-        return item.amount * item.level ; 
+        return item.amount * item.level;
     }
 
     private static void transferItemToRecentlySold(string ID)

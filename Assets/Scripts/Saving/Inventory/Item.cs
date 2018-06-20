@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 [Serializable]
 public class Item
@@ -22,12 +21,30 @@ public class Item
         return name == null || name.Length < 1;
     }
 
+    public static Item clone(Item cloned)
+    {
+        Item item = new Item();
+
+        item.amount = cloned.amount;
+        item.desc = cloned.desc;
+        item.GemStats = cloned.GemStats;
+        item.ItemStats = cloned.ItemStats;
+        item.level = cloned.level;
+        item.name = cloned.name;
+        item.type = cloned.type;
+        item.picture = cloned.picture;
+        item.rarity = cloned.rarity;
+        item.maxAmount = cloned.maxAmount;
+
+        return item;
+    }
+
     // Basic constructor without parameters
     public Item()
     {
-   
     }
-    // Basic constructor 
+
+    // Basic constructor
     public Item(string name)
     {
         amount = 1;

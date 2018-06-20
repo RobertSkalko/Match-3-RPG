@@ -1,9 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class Game  {
-
+﻿public class Game
+{
     public static bool saveIsLoaded = false;
-  
+
+    public static Slot FirstDraggedSlot;
+    public static Slot SecondDraggedSlot;
+
+
+   
 }

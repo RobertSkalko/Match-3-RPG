@@ -1,33 +1,38 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 [Serializable]
-public class Slot  {
-
-     
-
+public class Slot
+{
     public string type;
 
+    
     [SerializeField]
-    private Item ItemInSlot;
+    private Item ItemInSlot;    
     public Item itemInSlot
     {
         get { return ItemInSlot; }
-        set { ItemInSlot = value; if (Game.saveIsLoaded)Save.SaveTheGame();}
+        set { ItemInSlot = value;  if (Game.saveIsLoaded) Save.SaveTheGame();}
     }
-     
 
     public Slot(string type)
     {
         this.type = type;
     }
 
+    public static Slot clone(Slot cloned)
+    {
+        Slot slot = new Slot("");
+
+        slot.ItemInSlot = cloned.ItemInSlot;
+        slot.type = cloned.type;      
+
+        return slot;
+    }
+
+
     public class Types
     {
-
         public static string BankSlot = "BankSlot";
         public static string ItemSlot = "ItemSlot";
         public static string BagSlot = "BagSlot";
@@ -43,8 +48,5 @@ public class Slot  {
             public static string Secondsocket = "Secondsocket";
             public static string Thirdsocket = "ThirdSocket";
         }
-
     }
-
-
 }

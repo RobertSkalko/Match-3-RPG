@@ -49,7 +49,9 @@ public class Save
 
     public static void NewGame()
     {
-        Save.file.player.inventory.getBag("Bank1").Slots[0].itemInSlot = new Item("TEST ITEM");
+        Save.file.player.inventory.getBag("Bank1").Slots[0].itemInSlot = new Item("First ITEM");
+        Save.file.player.inventory.getBag("Bank1").Slots[1].itemInSlot = new Item("Second ITEM");
+        Save.file.player.inventory.getBag("Bank1").Slots[2].itemInSlot = new Item("Third ITEM");
 
         SaveTheGame();
 
