@@ -61,8 +61,10 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Enums\BagNames.cs" />
     <Compile Include="Assets\Scripts\Game.cs" />
-    <Compile Include="Assets\Scripts\Inventory\AttachCanvas.cs" />
-    <Compile Include="Assets\Scripts\Inventory\AttachItem.cs" />
+    <Compile Include="Assets\Scripts\Inventory\AttachSlot\aSlotData.cs" />
+    <Compile Include="Assets\Scripts\Inventory\AttachSlot\aSlotDragEvents.cs" />
+    <Compile Include="Assets\Scripts\Inventory\AttachSlot\aSlotHover.cs" />
+    <Compile Include="Assets\Scripts\Inventory\AttachSlot\aSlotRightClick.cs" />
     <Compile Include="Assets\Scripts\Inventory\PopulateBags.cs" />
     <Compile Include="Assets\Scripts\LoadGame\LoadSaveFile.cs" />
     <Compile Include="Assets\Scripts\MainMenu\LoadAllSaves.cs" />

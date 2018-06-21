@@ -7,8 +7,8 @@ public class PopulateBags : MonoBehaviour
 {
     private void Start()
     {
-        Container Bank1 = Save.file.player.inventory.getBag(BagNames.Bank1);
-        Container Bag1 = Save.file.player.inventory.getBag(BagNames.Bag1);
+        Container Bank1 = Save.file.player.inventory.getBag(Names.Bags.Bank1);
+        Container Bag1 = Save.file.player.inventory.getBag(Names.Bags.Bag1);
 
         for (int i = 0; i < Bank1.Slots.Length; i++)
         {
@@ -16,7 +16,7 @@ public class PopulateBags : MonoBehaviour
 
             GameObject newSlot = new GameObject(name);
 
-            newSlot.AddComponent<AttachItem>();
+            newSlot.AddComponent<aSlotData>();
         }
 
         for (int i = 0; i < Bag1.Slots.Length; i++)
@@ -25,7 +25,7 @@ public class PopulateBags : MonoBehaviour
 
             GameObject newSlot = new GameObject(name);
 
-            newSlot.AddComponent<AttachItem>();
+            newSlot.AddComponent<aSlotData>();
         }
     }
 }

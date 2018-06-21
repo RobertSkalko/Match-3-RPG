@@ -58,7 +58,7 @@ public class ItemUtils
 
     private static void transferItemToRecentlySold(string ID)
     {
-        Slot[] recentlySold = Save.file.player.inventory.getBag(BagNames.RecentlySold).Slots;
+        Slot[] recentlySold = Save.file.player.inventory.getBag(Names.Bags.RecentlySold).Slots;
 
         List<Slot> list = new List<Slot>();
         list.AddRange(recentlySold);

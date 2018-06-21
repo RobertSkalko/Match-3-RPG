@@ -147,12 +147,12 @@ public class Save
 
         public Inventory()
         {
-            Bags.Add(new Container(BagNames.Bank1, 72));
-            Bags.Add(new Container(BagNames.Bag1, 20));
-            Bags.Add(new Container(BagNames.Bag2, 20));
-            Bags.Add(new Container(BagNames.Bag3, 20));
-            Bags.Add(new Container(BagNames.Bag4, 20));
-            Bags.Add(new Container(BagNames.RecentlySold, 50));
+            Bags.Add(new Container(Names.Bags.Bank1, 72));
+            Bags.Add(new Container(Names.Bags.Bag1, 20));
+            Bags.Add(new Container(Names.Bags.Bag2, 20));
+            Bags.Add(new Container(Names.Bags.Bag3, 20));
+            Bags.Add(new Container(Names.Bags.Bag4, 20));
+            Bags.Add(new Container(Names.Bags.RecentlySold, 50));
         }
     }
 }
