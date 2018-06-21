@@ -94,11 +94,16 @@ public class AttachItem : MonoBehaviour, IPointerDownHandler, IPointerEnterHandl
             Text info = hoverInfo.AddComponent<Text>();
             info.text = slot.itemInSlot.name;
             info.font = Game.font;
+            info.raycastTarget = false;
 
             Image img = hoverBox.AddComponent<Image>();
             img.color = Color.gray;
+            img.raycastTarget = false;
 
-            hoverBox.transform.position = data.position;
+            Vector2 pos = data.position;
+            pos.x = pos.x + 50;
+
+            hoverBox.transform.position = pos;
         }
     }
 
@@ -106,7 +111,7 @@ public class AttachItem : MonoBehaviour, IPointerDownHandler, IPointerEnterHandl
     {
         GameObject obj = data.pointerCurrentRaycast.gameObject;
 
-        if (AttachItem.hoverBox != null) Destroy(AttachItem.hoverBox);
+        if (hoverBox != null) Destroy(hoverBox);
 
         AttachItem.hovered = false;
     }

@@ -61,6 +61,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Enums\BagNames.cs" />
     <Compile Include="Assets\Scripts\Game.cs" />
+    <Compile Include="Assets\Scripts\Inventory\AttachCanvas.cs" />
     <Compile Include="Assets\Scripts\Inventory\AttachItem.cs" />
     <Compile Include="Assets\Scripts\Inventory\PopulateBags.cs" />
     <Compile Include="Assets\Scripts\LoadGame\LoadSaveFile.cs" />
