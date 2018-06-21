@@ -33,13 +33,15 @@ public class Save
         {
             if (save.name.Equals(name))
             {
-                StartTheGame();
+                StartTheGame(save);
             }
         }
     }
 
-    private static void StartTheGame()
+    private static void StartTheGame(Save save)
     {
+        file = save;
+
         Debug.Log("Loading Game: " + file.name);
 
         SceneManager.LoadScene("Bank");
@@ -57,7 +59,7 @@ public class Save
 
         Debug.Log("Game Started");
 
-        StartTheGame();
+        StartTheGame(file);
     }
 
     //public int SaveFileNumber = 1;

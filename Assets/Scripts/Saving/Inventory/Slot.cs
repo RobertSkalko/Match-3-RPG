@@ -1,18 +1,19 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 [Serializable]
 public class Slot
 {
     public string type;
 
-    
     [SerializeField]
-    private Item ItemInSlot;    
+    private Item ItemInSlot;
+
     public Item itemInSlot
     {
         get { return ItemInSlot; }
-        set { ItemInSlot = value;  if (Game.saveIsLoaded) Save.SaveTheGame();}
+        set { ItemInSlot = value; if (Game.saveIsLoaded) Save.SaveTheGame(); }
     }
 
     public Slot(string type)
@@ -25,11 +26,15 @@ public class Slot
         Slot slot = new Slot("");
 
         slot.ItemInSlot = cloned.ItemInSlot;
-        slot.type = cloned.type;      
+        slot.type = cloned.type;
 
         return slot;
     }
 
+    public void delete()
+    {
+        this.itemInSlot = null;
+    }
 
     public class Types
     {
@@ -47,6 +52,30 @@ public class Slot
             public static string Firstsocket = "Firstsocket";
             public static string Secondsocket = "Secondsocket";
             public static string Thirdsocket = "ThirdSocket";
+        }
+    }
+
+    public void delete(GameObject obj)
+    {
+        ItemInSlot = null;
+
+        updateImage(obj);
+    }
+
+    public void setItem(GameObject obj, Item item)
+    {
+        ItemInSlot = item;
+
+        updateImage(obj);
+    }
+
+    public void updateImage(GameObject Obj)
+    {
+        if (Obj != null && Obj.GetComponent<RawImage>() != null)
+        {
+            Texture2D img = Resources.Load<Texture2D>("unknown");
+
+            Obj.GetComponent<RawImage>().texture = img;
         }
     }
 }

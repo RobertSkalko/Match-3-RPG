@@ -2,39 +2,33 @@
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class AttachItem : MonoBehaviour
+public class AttachItem : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler, IEndDragHandler, IBeginDragHandler, IPointerExitHandler
 {
+    private bool sentinel = true;
     private bool initialized = false;
     public string Name;
     private GameObject Container;
-    private GameObject Obj;
+    private GameObject CurrentObj;
+    private GameObject canvas;
+    public static bool hovered;
 
-    public Slot Slot;
+    public static GameObject hoverBox;
+
+    [SerializeField]
+    private Slot slot;
+
+    public Slot Slot
+    {
+        get { return slot; }
+        set { slot = value; }
+    }
 
     public void updateFields()
     {
         Container = GameObject.Find("Bankslots");
-        Obj = this.transform.gameObject;
-        Name = Obj.name;
-    }
-
-    private void changeImage()
-    {
-        Debug.Log("Check if img can be changed");
-
-        if (Obj != null && Obj.GetComponent<RawImage>() != null)
-        {
-            Debug.Log("Changing img");
-
-            Texture2D img = Resources.Load<Texture2D>("unknown");
-
-            Obj.GetComponent<RawImage>().texture = img;
-        }
-    }
-
-    private void changeItem()
-    {
-        changeImage();
+        CurrentObj = this.transform.gameObject;
+        Name = CurrentObj.name;
+        canvas = GameObject.Find("Canvas");
     }
 
     // Use this for initialization
@@ -46,95 +40,100 @@ public class AttachItem : MonoBehaviour
 
         Slot = ItemUtils.getSlotByID(Name);
 
-        Obj.tag = "ItemSlot";
+        CurrentObj.tag = "ItemSlot";
 
-        Obj.layer = 5;
+        CurrentObj.layer = 5;
 
-        Obj.transform.SetParent(Container.transform);
+        CurrentObj.transform.SetParent(Container.transform);
 
-        Obj.AddComponent<RawImage>();
+        CurrentObj.AddComponent<RawImage>();
 
-        Obj.AddComponent<EventTrigger>();
+        CurrentObj.AddComponent<EventTrigger>();
 
-        Obj.transform.localScale = new Vector3(1f, 1f, 1f);
+        CurrentObj.transform.localScale = new Vector3(1f, 1f, 1f);
 
-        EventTrigger eventTrigger = Obj.GetComponent<EventTrigger>();
-
-        // onclick
-        EventTrigger.Entry pointerDownEntry = new EventTrigger.Entry();
-        pointerDownEntry.eventID = EventTriggerType.PointerDown;
-        pointerDownEntry.callback.AddListener((data) => { OnRightButtonDown((PointerEventData)data); });
-        eventTrigger.triggers.Add(pointerDownEntry);
-        // on hover
-        EventTrigger.Entry pointerOver = new EventTrigger.Entry();
-        pointerOver.eventID = EventTriggerType.PointerEnter;
-        pointerOver.callback.AddListener((data) => { OnPointerOver((PointerEventData)data); });
-        eventTrigger.triggers.Add(pointerOver);
-        // on exit hover
-        EventTrigger.Entry pointerOverExit = new EventTrigger.Entry();
-        pointerOverExit.eventID = EventTriggerType.PointerEnter;
-        pointerOverExit.callback.AddListener((data) => { OnPointerOverExit((PointerEventData)data); });
-        eventTrigger.triggers.Add(pointerOverExit);
-        // begin drag
-        EventTrigger.Entry beginDrag = new EventTrigger.Entry();
-        beginDrag.eventID = EventTriggerType.BeginDrag;
-        beginDrag.callback.AddListener((data) => { OnBeginDrag((PointerEventData)data); });
-        eventTrigger.triggers.Add(beginDrag);
-        // end drag
-        EventTrigger.Entry endDrag = new EventTrigger.Entry();
-        endDrag.eventID = EventTriggerType.EndDrag;
-        endDrag.callback.AddListener((data) => { OnEndDrag((PointerEventData)data); });
-        eventTrigger.triggers.Add(endDrag);
+        Slot.updateImage(CurrentObj);
     }
 
-    private void swapItemsOnDrag()
+    private void swapItemsOnDrag(GameObject SecondDraggedObj)
     {
         Debug.Log("Swapped items");
 
         Slot saved = Slot.clone(Game.FirstDraggedSlot);
 
-        Game.FirstDraggedSlot.itemInSlot = Game.SecondDraggedSlot.itemInSlot;
+        Game.FirstDraggedSlot.setItem(CurrentObj, Game.SecondDraggedSlot.itemInSlot);
 
-        Game.SecondDraggedSlot.itemInSlot = saved.itemInSlot;
+        Game.SecondDraggedSlot.setItem(SecondDraggedObj, saved.itemInSlot);
     }
 
-    private void OnEndDrag(PointerEventData data)
+    public void OnPointerEnter(PointerEventData data)
     {
-        GameObject obj = data.pointerCurrentRaycast.gameObject;
-
-        if (obj.GetComponent<AttachItem>() != null)
+        if (slot == null || slot.itemInSlot.isEmpty())
         {
-            Game.SecondDraggedSlot = obj.GetComponent<AttachItem>().Slot;
+            return;
+        }
+        if (!hovered)
+        {
+            if (hoverBox != null)
+            {
+                Destroy(hoverBox);
+            }
 
-            swapItemsOnDrag();
+            hovered = true;
+
+            hoverBox = new GameObject("hoverBox");
+            GameObject hoverInfo = new GameObject("hoverInfo");
+
+            // ignores raycast
+            hoverBox.layer = 2;
+            hoverInfo.layer = 2;
+
+            hoverInfo.transform.parent = hoverBox.transform;
+            hoverBox.transform.parent = canvas.transform;
+
+            Text info = hoverInfo.AddComponent<Text>();
+            info.text = slot.itemInSlot.name;
+            info.font = Game.font;
+
+            Image img = hoverBox.AddComponent<Image>();
+            img.color = Color.gray;
+
+            hoverBox.transform.position = data.position;
         }
     }
 
-    private void OnBeginDrag(PointerEventData data)
+    public void OnPointerExit(PointerEventData data)
     {
-        Game.FirstDraggedSlot = Slot;
+        GameObject obj = data.pointerCurrentRaycast.gameObject;
 
-        Game.SecondDraggedSlot = null;
+        if (AttachItem.hoverBox != null) Destroy(AttachItem.hoverBox);
+
+        AttachItem.hovered = false;
     }
 
-    private void OnPointerOverExit(PointerEventData data)
-    {
-        string name = data.pointerCurrentRaycast.gameObject.name;
-    }
-
-    private void OnPointerOver(PointerEventData data)
-    {
-        string name = data.pointerCurrentRaycast.gameObject.name;
-    }
-
-    private void OnRightButtonDown(PointerEventData data)
+    public void OnPointerDown(PointerEventData data)
     {
         string name = data.pointerCurrentRaycast.gameObject.name;
 
         Debug.Log("You clicked an inventory slot: " + name);
+    }
 
-        //Slot.itemInSlot = null;
+    public void OnEndDrag(PointerEventData data)
+    {
+        GameObject SecondDraggedObj = data.pointerCurrentRaycast.gameObject;
 
-        //ItemUtils.deleteItem(name);
+        if (SecondDraggedObj.GetComponent<AttachItem>() != null)
+        {
+            Game.SecondDraggedSlot = SecondDraggedObj.GetComponent<AttachItem>().Slot;
+
+            swapItemsOnDrag(SecondDraggedObj);
+        }
+    }
+
+    public void OnBeginDrag(PointerEventData data)
+    {
+        Game.FirstDraggedSlot = Slot;
+
+        Game.SecondDraggedSlot = null;
     }
 }

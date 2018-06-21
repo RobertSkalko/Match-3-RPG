@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
 
 [Serializable]
 public class Item
@@ -21,6 +23,7 @@ public class Item
         return name == null || name.Length < 1;
     }
 
+    /*
     public static Item clone(Item cloned)
     {
         Item item = new Item();
@@ -38,6 +41,7 @@ public class Item
 
         return item;
     }
+    */
 
     // Basic constructor without parameters
     public Item()
