@@ -28,10 +28,7 @@ public class ItemUtils
 
         Debug.Log("Deleted item: " + getSlotByID(name).itemInSlot.name);
 
-
         getSlotByID(name).itemInSlot = null;
-
-
     }
 
     public static Slot getSlotByID(string ID)

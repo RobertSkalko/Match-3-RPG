@@ -59,7 +59,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Plugins\SeriazableDictionary.cs" />
+    <Compile Include="Assets\Plugins\tooltipscrippluginforstudy\GUIController.cs" />
+    <Compile Include="Assets\Plugins\tooltipscrippluginforstudy\Icon.cs" />
+    <Compile Include="Assets\Plugins\tooltipscrippluginforstudy\ObjectHandler.cs" />
+    <Compile Include="Assets\Plugins\tooltipscrippluginforstudy\ToolTipHandler.cs" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>C:/Users/User/Documents/Match 3 Crawler/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>

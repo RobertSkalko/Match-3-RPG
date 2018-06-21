@@ -4,13 +4,11 @@ using UnityEngine.UI;
 
 public class AttachItem : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler, IEndDragHandler, IBeginDragHandler, IPointerExitHandler
 {
-    private bool sentinel = true;
-    private bool initialized = false;
     public string Name;
     private GameObject Container;
     private GameObject CurrentObj;
-    private GameObject canvas;
     public static bool hovered;
+    private GameObject canvas;
 
     public static GameObject hoverBox;
 
@@ -25,22 +23,18 @@ public class AttachItem : MonoBehaviour, IPointerDownHandler, IPointerEnterHandl
 
     public void updateFields()
     {
-        Container = GameObject.Find("Bankslots");
+        canvas = GameObject.Find("Canvas");
         CurrentObj = this.transform.gameObject;
         Name = CurrentObj.name;
-        canvas = GameObject.Find("Canvas");
+        Container = GameObject.Find(ItemUtils.getNameOfItemSlot(Name));
     }
 
     // Use this for initialization
     private void Start()
     {
-        initialized = true;
-
         updateFields();
 
         Slot = ItemUtils.getSlotByID(Name);
-
-        CurrentObj.tag = "ItemSlot";
 
         CurrentObj.layer = 5;
 
@@ -48,22 +42,12 @@ public class AttachItem : MonoBehaviour, IPointerDownHandler, IPointerEnterHandl
 
         CurrentObj.AddComponent<RawImage>();
 
+        // this is REQUIRED for drag events to work!
         CurrentObj.AddComponent<EventTrigger>();
 
         CurrentObj.transform.localScale = new Vector3(1f, 1f, 1f);
 
         Slot.updateImage(CurrentObj);
-    }
-
-    private void swapItemsOnDrag(GameObject SecondDraggedObj)
-    {
-        Debug.Log("Swapped items");
-
-        Slot saved = Slot.clone(Game.FirstDraggedSlot);
-
-        Game.FirstDraggedSlot.setItem(CurrentObj, Game.SecondDraggedSlot.itemInSlot);
-
-        Game.SecondDraggedSlot.setItem(SecondDraggedObj, saved.itemInSlot);
     }
 
     public void OnPointerEnter(PointerEventData data)
@@ -100,11 +84,34 @@ public class AttachItem : MonoBehaviour, IPointerDownHandler, IPointerEnterHandl
             img.color = Color.gray;
             img.raycastTarget = false;
 
-            Vector2 pos = data.position;
-            pos.x = pos.x + 50;
-
-            hoverBox.transform.position = pos;
+            setPositionOfTooltip(data);
         }
+    }
+
+    private void setPositionOfTooltip(PointerEventData data)
+    {
+        Vector2 mousePos = data.position;
+        int objWidth = (int)(CurrentObj.GetComponent<RectTransform>().rect.width * 1.5);
+
+        bool isLeftSideOfScreen = true;
+
+        if (mousePos.x > Screen.width / 2) { isLeftSideOfScreen = false; }
+
+        int pushElementLeftOrRight = 0;
+
+        if (isLeftSideOfScreen)
+        {
+            pushElementLeftOrRight = objWidth;
+        }
+        else
+        {
+            pushElementLeftOrRight = -objWidth;
+        }
+
+        Vector2 slotPos = CurrentObj.transform.position;
+        slotPos.x = slotPos.x + pushElementLeftOrRight;
+
+        hoverBox.transform.position = slotPos;
     }
 
     public void OnPointerExit(PointerEventData data)
@@ -120,7 +127,7 @@ public class AttachItem : MonoBehaviour, IPointerDownHandler, IPointerEnterHandl
     {
         string name = data.pointerCurrentRaycast.gameObject.name;
 
-        Debug.Log("You clicked an inventory slot: " + name);
+        //Debug.Log("You clicked an inventory slot: " + name);
     }
 
     public void OnEndDrag(PointerEventData data)
@@ -131,7 +138,7 @@ public class AttachItem : MonoBehaviour, IPointerDownHandler, IPointerEnterHandl
         {
             Game.SecondDraggedSlot = SecondDraggedObj.GetComponent<AttachItem>().Slot;
 
-            swapItemsOnDrag(SecondDraggedObj);
+            swapItemsOnDrag(CurrentObj, SecondDraggedObj);
         }
     }
 
@@ -140,5 +147,16 @@ public class AttachItem : MonoBehaviour, IPointerDownHandler, IPointerEnterHandl
         Game.FirstDraggedSlot = Slot;
 
         Game.SecondDraggedSlot = null;
+    }
+
+    private void swapItemsOnDrag(GameObject beginDrag, GameObject endDrag)
+    {
+        Debug.Log("Swapped items");
+
+        Slot saved = Slot.clone(Game.FirstDraggedSlot);
+
+        Game.FirstDraggedSlot.setItem(beginDrag, Game.SecondDraggedSlot.itemInSlot);
+
+        Game.SecondDraggedSlot.setItem(endDrag, saved.itemInSlot);
     }
 }

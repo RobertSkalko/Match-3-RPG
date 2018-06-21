@@ -73,9 +73,16 @@ public class Slot
     {
         if (Obj != null && Obj.GetComponent<RawImage>() != null)
         {
-            Texture2D img = Resources.Load<Texture2D>("unknown");
+            if (ItemInSlot.isEmpty())
+            {
+                Obj.GetComponent<RawImage>().texture = null;
+            }
+            else
+            {
+                Texture2D img = Resources.Load<Texture2D>("unknown");
 
-            Obj.GetComponent<RawImage>().texture = img;
+                Obj.GetComponent<RawImage>().texture = img;
+            }
         }
     }
 }

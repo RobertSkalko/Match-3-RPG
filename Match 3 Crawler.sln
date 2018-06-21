@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Match 3 Crawler", "Assembly-CSharp.csproj", "{99E269A0-A012-9E7A-77B1-FEA5F0DB11EA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Match 3 Crawler", "Assembly-CSharp-firstpass.csproj", "{56878A5A-9122-F324-ED77-EE577AECC03E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,10 @@ Global
 		{99E269A0-A012-9E7A-77B1-FEA5F0DB11EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{99E269A0-A012-9E7A-77B1-FEA5F0DB11EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{99E269A0-A012-9E7A-77B1-FEA5F0DB11EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{56878A5A-9122-F324-ED77-EE577AECC03E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56878A5A-9122-F324-ED77-EE577AECC03E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56878A5A-9122-F324-ED77-EE577AECC03E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56878A5A-9122-F324-ED77-EE577AECC03E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
