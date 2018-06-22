@@ -21,40 +21,72 @@ public class aSlotOnHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         }
         if (!SlotData.hovered)
         {
-            if (SlotData.hoverBox != null)
+            if (SlotData.tooltip != null)
             {
-                Destroy(SlotData.hoverBox);
+                Destroy(SlotData.tooltip);
             }
 
             SlotData.hovered = true;
 
-            SlotData.hoverBox = new GameObject("hoverBox");
-            GameObject hoverInfo = new GameObject("hoverInfo");
+            GameObject text = createText();
+            SlotData.tooltip = createTooltip(text);
 
-            // ignores raycast
-            SlotData.hoverBox.layer = 2;
-            hoverInfo.layer = 2;
-
-            hoverInfo.transform.parent = SlotData.hoverBox.transform;
-            SlotData.hoverBox.transform.parent = aSlotData.canvas.transform;
-
-            Text info = hoverInfo.AddComponent<Text>();
-            info.text = SlotData.Slot.itemInSlot.name;
-            info.font = Game.font;
-            info.raycastTarget = false;
-
-            Image img = SlotData.hoverBox.AddComponent<Image>();
-            img.color = Color.gray;
-            img.raycastTarget = false;
+            // setting parents
+            text.transform.SetParent(SlotData.tooltip.transform);
+            SlotData.tooltip.transform.SetParent(aSlotData.canvas.transform);
+            //
 
             setPositionOfTooltip(data);
         }
     }
 
+    private GameObject createTooltip(GameObject Text)
+    {
+        GameObject tooltip = new GameObject("Tooltip");
+
+        RectTransform rect = tooltip.AddComponent<RectTransform>();
+        rect.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 150);
+        rect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 350);
+
+        // ignores raycast
+        //tooltip.layer = 2;
+
+        tooltip.AddComponent<Mask>();
+        ScrollRect scroll = tooltip.AddComponent<ScrollRect>();
+        scroll.movementType = ScrollRect.MovementType.Unrestricted;
+        scroll.inertia = false;
+        scroll.horizontal = false;
+        scroll.vertical = true;
+        scroll.content = Text.GetComponent<RectTransform>();
+
+        Image img = tooltip.AddComponent<Image>();
+        img.color = Color.gray;
+        img.raycastTarget = false;
+
+        return tooltip;
+    }
+
+    private GameObject createText()
+    {
+        string teststring = "\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING";
+
+        GameObject text = new GameObject("Text");
+
+        Text info = text.AddComponent<Text>();
+        info.text = SlotData.Slot.itemInSlot.name + teststring;
+
+        info.font = Game.font;
+        info.raycastTarget = false;
+        info.horizontalOverflow = HorizontalWrapMode.Wrap;
+        info.verticalOverflow = VerticalWrapMode.Overflow;
+
+        return text;
+    }
+
     private void setPositionOfTooltip(PointerEventData data)
     {
         Vector2 mousePos = data.position;
-        int objWidth = (int)(SlotData.CurrentObj.GetComponent<RectTransform>().rect.width * 1.5);
+        int objWidth = (int)(SlotData.CurrentObj.GetComponent<RectTransform>().rect.width / 2 + SlotData.tooltip.GetComponent<RectTransform>().rect.width / 2);
 
         bool isLeftSideOfScreen = true;
 
@@ -74,14 +106,14 @@ public class aSlotOnHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         Vector2 slotPos = SlotData.CurrentObj.transform.position;
         slotPos.x = slotPos.x + pushElementLeftOrRight;
 
-        SlotData.hoverBox.transform.position = slotPos;
+        SlotData.tooltip.transform.position = slotPos;
     }
 
     public void OnPointerExit(PointerEventData data)
     {
         GameObject obj = data.pointerCurrentRaycast.gameObject;
 
-        if (SlotData.hoverBox != null) Destroy(SlotData.hoverBox);
+        if (SlotData.tooltip != null) Destroy(SlotData.tooltip);
 
         SlotData.hovered = false;
     }

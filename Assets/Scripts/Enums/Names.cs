@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-public struct Names
+public static class Names
 {
-    public struct Bags
+    public class Bags
     {
         public const string Bank1 = "Bank1";
         /*
