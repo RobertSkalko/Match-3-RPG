@@ -23,7 +23,20 @@ public class aSlotData : MonoBehaviour
     {
         canvas = GameObject.Find("Canvas");
         CurrentObj = this.transform.gameObject;
-        Container = GameObject.Find(ItemUtils.getNameOfItemSlot(name));
+        Container = getContainer();
+    }
+
+    private GameObject getContainer()
+    {
+        if (name.Contains("Bank"))
+        {
+            return GameObject.FindGameObjectWithTag("Bank");
+        }
+        else if (name.Contains("Bag"))
+        {
+            return GameObject.FindGameObjectWithTag("Bag");
+        }
+        return null;
     }
 
     // Use this for initialization

@@ -59,9 +59,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\AssetLoading\Prefabs.cs" />
     <Compile Include="Assets\Scripts\Enums\Names.cs" />
     <Compile Include="Assets\Scripts\Game.cs" />
-    <Compile Include="Assets\Scripts\Inventory\aBag.cs" />
+    <Compile Include="Assets\Scripts\Inventory\aContainer.cs" />
+    <Compile Include="Assets\Scripts\Inventory\AttachBagChange\aBagChange.cs" />
+    <Compile Include="Assets\Scripts\Inventory\AttachBagChange\aBankChange.cs" />
     <Compile Include="Assets\Scripts\Inventory\AttachSlot\aSlotData.cs" />
     <Compile Include="Assets\Scripts\Inventory\AttachSlot\aSlotDragEvents.cs" />
     <Compile Include="Assets\Scripts\Inventory\AttachSlot\aSlotHover.cs" />

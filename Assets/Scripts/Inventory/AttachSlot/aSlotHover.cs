@@ -28,59 +28,25 @@ public class aSlotOnHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
             SlotData.hovered = true;
 
-            GameObject text = createText();
-            SlotData.tooltip = createTooltip(text);
+            SlotData.tooltip = Instantiate(Prefabs.ItemTooltip);
 
-            // setting parents
-            text.transform.SetParent(SlotData.tooltip.transform);
             SlotData.tooltip.transform.SetParent(aSlotData.canvas.transform);
-            //
+
+            setFields(SlotData.tooltip);
 
             setPositionOfTooltip(data);
         }
     }
 
-    private GameObject createTooltip(GameObject Text)
+    private void setFields(GameObject tooltip)
     {
-        GameObject tooltip = new GameObject("Tooltip");
+        GameObject viewport = tooltip.transform.Find("Viewport").gameObject;
+        GameObject contents = viewport.transform.Find("Contents").gameObject;
+        GameObject name = contents.transform.Find("Name").gameObject;
+        GameObject stats = contents.transform.Find("Stats").gameObject;
+        GameObject desc = contents.transform.Find("Desc").gameObject;
 
-        RectTransform rect = tooltip.AddComponent<RectTransform>();
-        rect.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 150);
-        rect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 350);
-
-        // ignores raycast
-        //tooltip.layer = 2;
-
-        tooltip.AddComponent<Mask>();
-        ScrollRect scroll = tooltip.AddComponent<ScrollRect>();
-        scroll.movementType = ScrollRect.MovementType.Unrestricted;
-        scroll.inertia = false;
-        scroll.horizontal = false;
-        scroll.vertical = true;
-        scroll.content = Text.GetComponent<RectTransform>();
-
-        Image img = tooltip.AddComponent<Image>();
-        img.color = Color.gray;
-        img.raycastTarget = false;
-
-        return tooltip;
-    }
-
-    private GameObject createText()
-    {
-        string teststring = "\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING\nTESTING";
-
-        GameObject text = new GameObject("Text");
-
-        Text info = text.AddComponent<Text>();
-        info.text = SlotData.Slot.itemInSlot.name + teststring;
-
-        info.font = Game.font;
-        info.raycastTarget = false;
-        info.horizontalOverflow = HorizontalWrapMode.Wrap;
-        info.verticalOverflow = VerticalWrapMode.Overflow;
-
-        return text;
+        name.GetComponent<Text>().text = SlotData.Slot.itemInSlot.name;
     }
 
     private void setPositionOfTooltip(PointerEventData data)

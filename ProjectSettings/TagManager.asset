@@ -7,6 +7,8 @@ TagManager:
   - Save File Container
   - Save File
   - ItemSlot
+  - Bank
+  - Bag
   layers:
   - Default
   - TransparentFX
