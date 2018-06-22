@@ -3,3 +3,6 @@
 /Packages/
 /Temp/
 /.vs/
+
+*.meta
+*.cs.meta
