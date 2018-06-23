@@ -63,6 +63,7 @@
     <Compile Include="Assets\Scripts\Enums\Names.cs" />
     <Compile Include="Assets\Scripts\Game.cs" />
     <Compile Include="Assets\Scripts\Inventory\aContainer.cs" />
+    <Compile Include="Assets\Scripts\Inventory\aTooltipOnExit.cs" />
     <Compile Include="Assets\Scripts\Inventory\AttachBagChange\aContainerChange.cs" />
     <Compile Include="Assets\Scripts\Inventory\AttachSlot\aSlotData.cs" />
     <Compile Include="Assets\Scripts\Inventory\AttachSlot\aSlotDragEvents.cs" />

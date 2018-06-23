@@ -106,8 +106,11 @@ public class aSlotOnHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     {
         GameObject obj = data.pointerCurrentRaycast.gameObject;
 
-        if (SlotData.tooltip != null) Destroy(SlotData.tooltip);
+        if (!obj.Equals(SlotData.tooltip))
+        {
+            if (SlotData.tooltip != null) Destroy(SlotData.tooltip);
 
-        SlotData.hovered = false;
+            SlotData.hovered = false;
+        }
     }
 }
