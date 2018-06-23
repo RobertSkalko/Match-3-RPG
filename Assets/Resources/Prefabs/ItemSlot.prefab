@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 114056262529300016}
   - component: {fileID: 114609833468876744}
   - component: {fileID: 114038575251253660}
+  - component: {fileID: 114782356892967608}
   m_Layer: 5
   m_Name: ItemSlot
   m_TagString: Untagged
@@ -97,6 +98,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Delegates: []
   delegates: []
+--- !u!114 &114782356892967608
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1423496573500926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0.6313726, g: 0.6313726, b: 0.6039216, a: 1}
+  m_EffectDistance: {x: 0, y: 0}
+  m_UseGraphicAlpha: 1
 --- !u!222 &222245833918339640
 CanvasRenderer:
   m_ObjectHideFlags: 1

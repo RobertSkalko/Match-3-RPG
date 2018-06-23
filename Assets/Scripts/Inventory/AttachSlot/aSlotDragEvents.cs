@@ -9,7 +9,7 @@ public class aSlotDragEvents : MonoBehaviour, IEndDragHandler, IBeginDragHandler
     private aSlotData SlotData;
 
     public static GameObject draggedItem;                                      // Item that is dragged now
-    public static GameObject icon;                                                  // Icon of dragged item
+    public static GameObject dragIcon;                                                  // Icon of dragged item
     public static DragAndDropCell sourceCell;                                       // From this cell dragged item is
     public static GameObject canvas;
 
@@ -47,14 +47,14 @@ public class aSlotDragEvents : MonoBehaviour, IEndDragHandler, IBeginDragHandler
         GameObject sourceCell = this.gameObject;                                             // Remember source cell
         draggedItem = this.gameObject;                                                     // Set as dragged item
                                                                                            // Create item's icon
-        icon = new GameObject();
-        icon.transform.SetParent(canvas.transform);
-        icon.name = "Icon";
-        RawImage myImage = sourceCell.GetComponent<RawImage>();                         // Disable icon's raycast for correct drop handling
-        RawImage iconImage = icon.AddComponent<RawImage>();
-        iconImage.raycastTarget = false;
-        iconImage.texture = myImage.texture;
-        RectTransform iconRect = icon.GetComponent<RectTransform>();
+        dragIcon = new GameObject();
+        dragIcon.transform.SetParent(canvas.transform, false);
+        dragIcon.name = "Icon";
+        RawImage itemImg = sourceCell.GetComponent<RawImage>();                         // Disable icon's raycast for correct drop handling
+        RawImage dragIconImg = dragIcon.AddComponent<RawImage>();
+        dragIconImg.raycastTarget = false;
+        dragIconImg.texture = itemImg.texture;
+        RectTransform iconRect = dragIcon.GetComponent<RectTransform>();
         // Set icon's dimensions
         RectTransform myRect = GetComponent<RectTransform>();
         iconRect.pivot = new Vector2(0.5f, 0.5f);
@@ -65,13 +65,13 @@ public class aSlotDragEvents : MonoBehaviour, IEndDragHandler, IBeginDragHandler
 
     private void ResetConditions()
     {
-        if (icon != null)
+        if (dragIcon != null)
         {
-            Destroy(icon);                                                          // Destroy icon on item drop
+            Destroy(dragIcon);                                                          // Destroy icon on item drop
         }
 
         draggedItem = null;
-        icon = null;
+        dragIcon = null;
         sourceCell = null;
     }
 
@@ -88,9 +88,9 @@ public class aSlotDragEvents : MonoBehaviour, IEndDragHandler, IBeginDragHandler
 
     public void OnDrag(PointerEventData data)
     {
-        if (icon != null)
+        if (dragIcon != null)
         {
-            icon.transform.position = Input.mousePosition;                          // Item's icon follows to cursor in screen pixels
+            dragIcon.transform.position = Input.mousePosition;                          // Item's icon follows to cursor in screen pixels
         }
     }
 }
