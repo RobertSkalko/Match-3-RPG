@@ -21,7 +21,8 @@ public class aSlotDragEvents : MonoBehaviour, IEndDragHandler, IBeginDragHandler
 
     public void OnEndDrag(PointerEventData data)
     {
-        GameObject SecondDraggedObj = data.pointerCurrentRaycast.gameObject;
+        // the frame object is the one who picks up the raycast so you have to get the parent..
+        GameObject SecondDraggedObj = data.pointerCurrentRaycast.gameObject.transform.parent.gameObject;
 
         if (SecondDraggedObj.GetComponent<aSlotData>() != null)
         {
@@ -35,18 +36,23 @@ public class aSlotDragEvents : MonoBehaviour, IEndDragHandler, IBeginDragHandler
 
     public void OnBeginDrag(PointerEventData data)
     {
+        if (SlotData.tooltip != null) Destroy(SlotData.tooltip);
+
         Game.FirstDraggedSlot = SlotData.Slot;
 
         Game.SecondDraggedSlot = null;
 
-        summonDragIcon();
+        if (!SlotData.Slot.itemInSlot.isEmpty())
+        {
+            summonDragIcon();
+        }
     }
 
     private void summonDragIcon()
     {
-        GameObject sourceCell = this.gameObject;                                             // Remember source cell
-        draggedItem = this.gameObject;                                                     // Set as dragged item
-                                                                                           // Create item's icon
+        GameObject sourceCell = this.gameObject;
+        draggedItem = this.gameObject;
+
         dragIcon = new GameObject();
         dragIcon.transform.SetParent(canvas.transform, false);
         dragIcon.name = "Icon";
@@ -67,7 +73,7 @@ public class aSlotDragEvents : MonoBehaviour, IEndDragHandler, IBeginDragHandler
     {
         if (dragIcon != null)
         {
-            Destroy(dragIcon);                                                          // Destroy icon on item drop
+            Destroy(dragIcon);
         }
 
         draggedItem = null;
@@ -90,7 +96,7 @@ public class aSlotDragEvents : MonoBehaviour, IEndDragHandler, IBeginDragHandler
     {
         if (dragIcon != null)
         {
-            dragIcon.transform.position = Input.mousePosition;                          // Item's icon follows to cursor in screen pixels
+            dragIcon.transform.position = Input.mousePosition;
         }
     }
 }

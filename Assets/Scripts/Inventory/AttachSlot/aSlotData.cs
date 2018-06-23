@@ -6,7 +6,6 @@ public class aSlotData : MonoBehaviour
 {
     public GameObject Container;
     public GameObject CurrentObj;
-    public bool hovered;
     public static GameObject canvas;
     public GameObject tooltip;
 
@@ -53,7 +52,7 @@ public class aSlotData : MonoBehaviour
         Slot.updateImage(CurrentObj);
 
         CurrentObj.AddComponent<aSlotDragEvents>();
-        CurrentObj.AddComponent<aSlotOnHover>();
+        CurrentObj.AddComponent<aSlotHover>();
         CurrentObj.AddComponent<aSlotRightClick>();
     }
 }

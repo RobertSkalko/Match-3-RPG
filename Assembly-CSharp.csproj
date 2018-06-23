@@ -62,13 +62,13 @@
     <Compile Include="Assets\Scripts\AssetLoading\Prefabs.cs" />
     <Compile Include="Assets\Scripts\Enums\Names.cs" />
     <Compile Include="Assets\Scripts\Game.cs" />
-    <Compile Include="Assets\Scripts\Inventory\aContainer.cs" />
-    <Compile Include="Assets\Scripts\Inventory\aTooltipOnExit.cs" />
     <Compile Include="Assets\Scripts\Inventory\AttachBagChange\aContainerChange.cs" />
+    <Compile Include="Assets\Scripts\Inventory\AttachContainer\aContainer.cs" />
     <Compile Include="Assets\Scripts\Inventory\AttachSlot\aSlotData.cs" />
     <Compile Include="Assets\Scripts\Inventory\AttachSlot\aSlotDragEvents.cs" />
     <Compile Include="Assets\Scripts\Inventory\AttachSlot\aSlotHover.cs" />
     <Compile Include="Assets\Scripts\Inventory\AttachSlot\aSlotRightClick.cs" />
+    <Compile Include="Assets\Scripts\Inventory\AttachTooltip\aTooltipOnExit.cs" />
     <Compile Include="Assets\Scripts\LoadGame\LoadSaveFile.cs" />
     <Compile Include="Assets\Scripts\MainMenu\LoadAllSaves.cs" />
     <Compile Include="Assets\Scripts\MainMenu\MainMenu.cs" />
@@ -81,6 +81,7 @@
     <Compile Include="Assets\Scripts\Saving\Inventory\Slot.cs" />
     <Compile Include="Assets\Scripts\Saving\Inventory\Stat.cs" />
     <Compile Include="Assets\Scripts\Saving\Save.cs" />
+    <Compile Include="Assets\Scripts\setMaxFPS.cs" />
     <Compile Include="Assets\Scripts\Utils\ItemUtils.cs" />
     <Compile Include="Assets\Scripts\Utils\ListUtils.cs" />
     <Compile Include="Assets\SimpleDragAndDrop\Scripts\DragAndDropCell.cs" />

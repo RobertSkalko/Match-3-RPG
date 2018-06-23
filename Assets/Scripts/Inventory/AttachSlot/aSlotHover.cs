@@ -4,15 +4,13 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class aSlotOnHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class aSlotHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     private aSlotData SlotData;
-    private GameObject tooltipObj;
 
     private void Start()
     {
         SlotData = this.gameObject.GetComponent<aSlotData>();
-        tooltipObj = SlotData.tooltip;
     }
 
     public void OnPointerEnter(PointerEventData data)
@@ -21,25 +19,21 @@ public class aSlotOnHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         {
             return;
         }
-        if (!SlotData.hovered)
+
+        if (SlotData.tooltip != null)
         {
-            if (SlotData.tooltip != null)
-            {
-                Destroy(SlotData.tooltip);
-            }
-
-            SlotData.hovered = true;
-
-            SlotData.tooltip = Instantiate(Prefabs.ItemTooltip);
-
-            SlotData.tooltip.transform.SetParent(aSlotData.canvas.transform, false);
-
-            setFields(SlotData.tooltip);
-
-            setXPositionOfTooltip(data);
-
-            setYPositionOfTooltip(data);
+            Destroy(SlotData.tooltip);
         }
+
+        SlotData.tooltip = Instantiate(Prefabs.ItemTooltip);
+
+        SlotData.tooltip.transform.SetParent(aSlotData.canvas.transform, false);
+
+        setFields(SlotData.tooltip);
+
+        setXPositionOfTooltip(data);
+
+        setYPositionOfTooltip(data);
     }
 
     private void setFields(GameObject tooltip)
@@ -109,8 +103,6 @@ public class aSlotOnHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         if (!obj.Equals(SlotData.tooltip))
         {
             if (SlotData.tooltip != null) Destroy(SlotData.tooltip);
-
-            SlotData.hovered = false;
         }
     }
 }
