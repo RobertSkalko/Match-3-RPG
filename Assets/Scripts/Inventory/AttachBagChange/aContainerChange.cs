@@ -3,22 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class aBagChange : MonoBehaviour, IPointerClickHandler
+public class aContainerChange : MonoBehaviour, IPointerClickHandler
 {
     private aContainer bagScript;
 
-    private void Start()
-    {
-        bagScript = GameObject.FindGameObjectWithTag("Bag").GetComponent<aContainer>();
-    }
+    public string bagName;
+    public GameObject container;
 
     public void OnPointerClick(PointerEventData eventData)
     {
         if (eventData.button == PointerEventData.InputButton.Right)
-        {
-            Debug.Log("Changing Bag to: " + name);
 
-            bagScript.changeBagTo(name);
+        {
+            bagScript = container.GetComponent<aContainer>();
+
+            Debug.Log("Changing Bag to: " + bagName);
+
+            bagScript.changeBagTo(bagName);
         }
     }
 }

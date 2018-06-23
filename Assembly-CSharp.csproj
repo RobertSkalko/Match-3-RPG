@@ -63,8 +63,7 @@
     <Compile Include="Assets\Scripts\Enums\Names.cs" />
     <Compile Include="Assets\Scripts\Game.cs" />
     <Compile Include="Assets\Scripts\Inventory\aContainer.cs" />
-    <Compile Include="Assets\Scripts\Inventory\AttachBagChange\aBagChange.cs" />
-    <Compile Include="Assets\Scripts\Inventory\AttachBagChange\aBankChange.cs" />
+    <Compile Include="Assets\Scripts\Inventory\AttachBagChange\aContainerChange.cs" />
     <Compile Include="Assets\Scripts\Inventory\AttachSlot\aSlotData.cs" />
     <Compile Include="Assets\Scripts\Inventory\AttachSlot\aSlotDragEvents.cs" />
     <Compile Include="Assets\Scripts\Inventory\AttachSlot\aSlotHover.cs" />
@@ -83,6 +82,9 @@
     <Compile Include="Assets\Scripts\Saving\Save.cs" />
     <Compile Include="Assets\Scripts\Utils\ItemUtils.cs" />
     <Compile Include="Assets\Scripts\Utils\ListUtils.cs" />
+    <Compile Include="Assets\SimpleDragAndDrop\Scripts\DragAndDropCell.cs" />
+    <Compile Include="Assets\SimpleDragAndDrop\Scripts\DragAndDropItem.cs" />
+    <Compile Include="Assets\SimpleDragAndDrop\Scripts\DummyControlUnit.cs" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>C:/Users/User/Documents/Match 3 Crawler/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>
