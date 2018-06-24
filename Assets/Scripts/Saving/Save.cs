@@ -20,7 +20,7 @@ public class Save
 
     public static void SaveTheGame()
     {
-        Debug.Log("Saving game");
+        //Debug.Log("Saving game");
 
         Directory.CreateDirectory(path);
 
@@ -45,15 +45,13 @@ public class Save
         Debug.Log("Loading Game: " + file.name);
 
         SceneManager.LoadScene("Bank");
-
-        Game.saveIsLoaded = true;
     }
 
     public static void NewGame()
     {
-        Save.file.player.inventory.getBag("Bank1").Slots[0].itemInSlot = new Item("First ITEM");
-        Save.file.player.inventory.getBag("Bank1").Slots[1].itemInSlot = new Item("Second ITEM");
-        Save.file.player.inventory.getBag("Bank1").Slots[2].itemInSlot = new Item("Third ITEM");
+        Save.file.player.inventory.getBag("Bank1").Slots[0].item = new Item("First ITEM");
+        Save.file.player.inventory.getBag("Bank1").Slots[1].item = new Item("Second ITEM");
+        Save.file.player.inventory.getBag("Bank1").Slots[2].item = new Item("Third ITEM");
 
         SaveTheGame();
 
@@ -64,7 +62,7 @@ public class Save
 
     //public int SaveFileNumber = 1;
 
-    public string name = "";
+    public string name;
 
     public GameSettings GameSetting = new GameSettings();
     public Player player = new Player();

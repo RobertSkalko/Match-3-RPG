@@ -19,16 +19,16 @@ public class ItemUtils
 
     public static void deleteItem(string name)
     {
-        if (getSlotByID(name).itemInSlot == null || getSlotByID(name).itemInSlot.isEmpty())
+        if (getSlotByID(name).item == null || getSlotByID(name).item.isEmpty())
         {
             Debug.Log("No item in slot, nothing to delete!");
 
             return;
         }
 
-        Debug.Log("Deleted item: " + getSlotByID(name).itemInSlot.name);
+        Debug.Log("Deleted item: " + getSlotByID(name).item.name);
 
-        getSlotByID(name).itemInSlot = null;
+        getSlotByID(name).item = null;
     }
 
     public static Slot getSlotByID(string ID)
@@ -41,12 +41,12 @@ public class ItemUtils
 
     public static Item getItemByID(string ID)
     {
-        return getSlotByID(ID).itemInSlot;
+        return getSlotByID(ID).item;
     }
 
     public static void sellItem(string ID)
     {
-        Save.file.player.giveGold(getValue(getSlotByID(ID).itemInSlot));
+        Save.file.player.giveGold(getValue(getSlotByID(ID).item));
 
         transferItemToRecentlySold(ID);
     }

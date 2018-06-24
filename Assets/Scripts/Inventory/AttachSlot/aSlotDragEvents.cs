@@ -8,9 +8,7 @@ public class aSlotDragEvents : MonoBehaviour, IEndDragHandler, IBeginDragHandler
 {
     private aSlotData SlotData;
 
-    public static GameObject draggedItem;                                      // Item that is dragged now
-    public static GameObject dragIcon;                                                  // Icon of dragged item
-    public static DragAndDropCell sourceCell;                                       // From this cell dragged item is
+    public static GameObject dragIcon;
     public static GameObject canvas;
 
     private void Start()
@@ -31,7 +29,7 @@ public class aSlotDragEvents : MonoBehaviour, IEndDragHandler, IBeginDragHandler
             swapItemsOnDrag(SlotData.CurrentObj, SecondDraggedObj);
         }
 
-        ResetConditions();
+        destroyDragIcon();
     }
 
     public void OnBeginDrag(PointerEventData data)
@@ -42,7 +40,7 @@ public class aSlotDragEvents : MonoBehaviour, IEndDragHandler, IBeginDragHandler
 
         Game.SecondDraggedSlot = null;
 
-        if (!SlotData.Slot.itemInSlot.isEmpty())
+        if (!SlotData.Slot.item.isEmpty())
         {
             summonDragIcon();
         }
@@ -51,12 +49,11 @@ public class aSlotDragEvents : MonoBehaviour, IEndDragHandler, IBeginDragHandler
     private void summonDragIcon()
     {
         GameObject sourceCell = this.gameObject;
-        draggedItem = this.gameObject;
 
         dragIcon = new GameObject();
         dragIcon.transform.SetParent(canvas.transform, false);
         dragIcon.name = "Icon";
-        RawImage itemImg = sourceCell.GetComponent<RawImage>();                         // Disable icon's raycast for correct drop handling
+        RawImage itemImg = sourceCell.GetComponent<RawImage>();
         RawImage dragIconImg = dragIcon.AddComponent<RawImage>();
         dragIconImg.raycastTarget = false;
         dragIconImg.texture = itemImg.texture;
@@ -69,16 +66,12 @@ public class aSlotDragEvents : MonoBehaviour, IEndDragHandler, IBeginDragHandler
         iconRect.sizeDelta = new Vector2(myRect.rect.width, myRect.rect.height);
     }
 
-    private void ResetConditions()
+    private void destroyDragIcon()
     {
         if (dragIcon != null)
         {
             Destroy(dragIcon);
         }
-
-        draggedItem = null;
-        dragIcon = null;
-        sourceCell = null;
     }
 
     private void swapItemsOnDrag(GameObject beginDrag, GameObject endDrag)
@@ -87,9 +80,9 @@ public class aSlotDragEvents : MonoBehaviour, IEndDragHandler, IBeginDragHandler
 
         Slot saved = Slot.clone(Game.FirstDraggedSlot);
 
-        Game.FirstDraggedSlot.setItem(beginDrag, Game.SecondDraggedSlot.itemInSlot);
+        Game.FirstDraggedSlot.setItem(beginDrag, Game.SecondDraggedSlot.item);
 
-        Game.SecondDraggedSlot.setItem(endDrag, saved.itemInSlot);
+        Game.SecondDraggedSlot.setItem(endDrag, saved.item);
     }
 
     public void OnDrag(PointerEventData data)

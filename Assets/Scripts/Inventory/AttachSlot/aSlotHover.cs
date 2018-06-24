@@ -15,7 +15,7 @@ public class aSlotHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
     public void OnPointerEnter(PointerEventData data)
     {
-        if (SlotData.Slot == null || SlotData.Slot.itemInSlot.isEmpty())
+        if (SlotData.Slot == null || SlotData.Slot.item.isEmpty())
         {
             return;
         }
@@ -44,7 +44,7 @@ public class aSlotHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         GameObject stats = contents.transform.Find("Stats").gameObject;
         GameObject desc = contents.transform.Find("Desc").gameObject;
 
-        name.GetComponent<Text>().text = SlotData.Slot.itemInSlot.name;
+        name.GetComponent<Text>().text = SlotData.Slot.item.name;
     }
 
     private void setXPositionOfTooltip(PointerEventData data)

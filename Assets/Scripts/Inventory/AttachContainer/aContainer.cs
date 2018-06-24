@@ -48,7 +48,7 @@ public class aContainer : MonoBehaviour
         {
             string name = Bag.name + ":" + i;
 
-            GameObject newSlot = Instantiate(Prefabs.ItemSlot);
+            GameObject newSlot = Instantiate(Prefabs.ItemSlot, this.gameObject.transform);
 
             newSlot.name = name;
         }

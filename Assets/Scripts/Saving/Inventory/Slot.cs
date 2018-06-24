@@ -10,10 +10,10 @@ public class Slot
     [SerializeField]
     private Item ItemInSlot;
 
-    public Item itemInSlot
+    public Item item
     {
         get { return ItemInSlot; }
-        set { ItemInSlot = value; if (Game.saveIsLoaded) Save.SaveTheGame(); }
+        set { ItemInSlot = value; if (Game.saveIsLoaded()) Save.SaveTheGame(); }
     }
 
     public Slot(string type)
@@ -33,14 +33,15 @@ public class Slot
 
     public void delete()
     {
-        this.itemInSlot = null;
+        this.item = null;
     }
 
     public class Types
     {
-        public static string BankSlot = "BankSlot";
+        //public static string BankSlot = "BankSlot";
         public static string ItemSlot = "ItemSlot";
-        public static string BagSlot = "BagSlot";
+
+        //public static string BagSlot = "BagSlot";
 
         public class Gear
         {
@@ -57,14 +58,14 @@ public class Slot
 
     public void delete(GameObject obj)
     {
-        ItemInSlot = null;
+        item = null;
 
         updateImage(obj);
     }
 
     public void setItem(GameObject obj, Item item)
     {
-        ItemInSlot = item;
+        this.item = item;
 
         updateImage(obj);
     }

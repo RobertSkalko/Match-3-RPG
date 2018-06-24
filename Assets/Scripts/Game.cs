@@ -2,7 +2,14 @@
 
 public class Game
 {
-    public static bool saveIsLoaded = false;
+    public static bool saveIsLoaded()
+    {
+        if (Save.file != null && Save.file.name != null)
+        {
+            return true;
+        }
+        return false;
+    }
 
     public static Slot FirstDraggedSlot;
     public static Slot SecondDraggedSlot;

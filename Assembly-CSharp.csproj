@@ -84,9 +84,6 @@
     <Compile Include="Assets\Scripts\setMaxFPS.cs" />
     <Compile Include="Assets\Scripts\Utils\ItemUtils.cs" />
     <Compile Include="Assets\Scripts\Utils\ListUtils.cs" />
-    <Compile Include="Assets\SimpleDragAndDrop\Scripts\DragAndDropCell.cs" />
-    <Compile Include="Assets\SimpleDragAndDrop\Scripts\DragAndDropItem.cs" />
-    <Compile Include="Assets\SimpleDragAndDrop\Scripts\DummyControlUnit.cs" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>C:/Users/User/Documents/Match 3 Crawler/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>
@@ -324,12 +321,6 @@
     <Reference Include="Boo.Lang">
       <HintPath>C:/Program Files/Unity/Editor/Data/MonoBleedingEdge/lib/mono/unity/Boo.Lang.dll</HintPath>
     </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
-      <Project>{56878A5A-9122-F324-ED77-EE577AECC03E}</Project>
-      <Name>Assembly-CSharp-firstpass</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

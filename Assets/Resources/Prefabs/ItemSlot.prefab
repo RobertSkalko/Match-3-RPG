@@ -23,7 +23,9 @@ GameObject:
   - component: {fileID: 114056262529300016}
   - component: {fileID: 114609833468876744}
   - component: {fileID: 114038575251253660}
-  - component: {fileID: 114782356892967608}
+  - component: {fileID: 114168010968731782}
+  - component: {fileID: 114874083384810070}
+  - component: {fileID: 114377600464959874}
   m_Layer: 5
   m_Name: ItemSlot
   m_TagString: Untagged
@@ -85,7 +87,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04b4af9301d5de84b87c478fafd7d663, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Container: {fileID: 0}
   CurrentObj: {fileID: 0}
   tooltip: {fileID: 0}
   slot:
@@ -101,6 +102,17 @@ MonoBehaviour:
       type: 
       ItemStats: []
       GemStats: []
+--- !u!114 &114168010968731782
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1423496573500926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b84d76383431f354e8d934d1bea329b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114178970980146844
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -127,6 +139,17 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
+--- !u!114 &114377600464959874
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1423496573500926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13cee0b53fb13b1469d7d653fd0c6065, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114609833468876744
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -140,7 +163,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Delegates: []
   delegates: []
---- !u!114 &114782356892967608
+--- !u!114 &114874083384810070
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -148,12 +171,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1423496573500926}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Script: {fileID: 11500000, guid: 79268e540d0188b44aafc8255c931653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EffectColor: {r: 0.6313726, g: 0.6313726, b: 0.6039216, a: 1}
-  m_EffectDistance: {x: 0, y: 0}
-  m_UseGraphicAlpha: 1
 --- !u!222 &222245833918339640
 CanvasRenderer:
   m_ObjectHideFlags: 1

@@ -21,7 +21,7 @@ public class Container
         for (var i = 0; i < Slots.Length; i++)
         {
             Slots[i] = new Slot(Slot.Types.ItemSlot);
-            Slots[i].itemInSlot = null;
+            Slots[i].item = null;
         }
     }
 }

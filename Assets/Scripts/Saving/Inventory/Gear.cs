@@ -30,13 +30,13 @@ public class Gear
 
         for (int i = 0; i < allSlots.Count; i++)
         {
-            foreach (NameValue stat in allSlots[i].itemInSlot.ItemStats)
+            foreach (NameValue stat in allSlots[i].item.ItemStats)
             {
                 if (stat == null) continue;
                 allStats.Add(stat);
             }
 
-            foreach (NameValue stat in allSlots[i].itemInSlot.GemStats)
+            foreach (NameValue stat in allSlots[i].item.GemStats)
             {
                 if (stat == null) continue;
                 allStats.Add(stat);
