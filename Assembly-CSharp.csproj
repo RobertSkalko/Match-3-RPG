@@ -68,6 +68,7 @@
     <Compile Include="Assets\Scripts\Inventory\AttachSlot\aSlotDragEvents.cs" />
     <Compile Include="Assets\Scripts\Inventory\AttachSlot\aSlotHover.cs" />
     <Compile Include="Assets\Scripts\Inventory\AttachSlot\aSlotRightClick.cs" />
+    <Compile Include="Assets\Scripts\Inventory\AttachTooltip\aTooltip.cs" />
     <Compile Include="Assets\Scripts\Inventory\AttachTooltip\aTooltipOnExit.cs" />
     <Compile Include="Assets\Scripts\LoadGame\LoadSaveFile.cs" />
     <Compile Include="Assets\Scripts\MainMenu\LoadAllSaves.cs" />
